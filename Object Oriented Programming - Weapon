@@ -1,0 +1,48 @@
+public class Weapon {
+
+    String name;
+    int maxDamage;
+
+    //construct
+    public Weapon()
+    {
+        name = "Pointy Stick";
+        maxDamage = 1;
+
+    }
+
+    public Weapon(String name, int maxDamage) //MaxDamage
+    {
+        name = name;
+        maxDamage = getMaxDamage();
+
+
+    }
+
+    //method getName
+    public String getName()
+    {
+
+        return name;
+    }
+
+    //method setName
+    public void setName (String name)
+    {
+        name = name;
+
+    }
+
+    //method getMaxDamage
+    public int getMaxDamage()
+    {
+        return maxDamage; //MaxDamage
+
+    }
+
+    //method setMaxDamage
+    public void setMaxDamage(int maxDamage)
+    {
+        maxDamage = maxDamage;
+    }
+}
