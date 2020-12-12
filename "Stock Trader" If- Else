@@ -1,0 +1,101 @@
+
+
+import java.util.Scanner;
+
+    public class Assignment03
+    {
+        public static void main(String[] args) {
+
+            //Create Scanner object
+            Scanner myObj = new Scanner(System.in);
+
+            //Start user input
+            System.out.println("Given Inputs");
+            System.out.print("");  //Blank space
+
+            System.out.print("Current Shares  :  ");    //Enter current shares
+            int currentShares = myObj.nextInt();
+
+            System.out.print("Purchase Price  :  ");    //Enter purchase price
+            int purchasePrice = myObj.nextInt();
+
+            System.out.print("Market Price    :  ");    //Market price
+            int marketPrice = myObj.nextInt();
+
+            System.out.print("Available Funds :  ");    //Available funds
+            int availableFunds = myObj.nextInt();
+
+            //Close Scanner after use
+            myObj.close();
+
+            // End user input
+
+
+            //Variables and Formulas
+            final int transactionFee = 10; //Transaction Fee for any purchase and or sale
+
+            double numberOfSharesToBuy = (Math.floor((availableFunds - transactionFee) / marketPrice)); //round to an even number the shares tp buy
+            //double totalBuyCost = 10 + marketPrice * numberOfSharesToBuy; //cost associated with shares purchased
+            int perShareBuyValue = purchasePrice - marketPrice; //difference between current share price less price paid
+            double totalBuyValue = perShareBuyValue * numberOfSharesToBuy; //value of shares
+            int availableFundsToBuyShares = (availableFunds-transactionFee)/marketPrice; //sell covers transaction fee
+            double aheadOfBuy = totalBuyValue - transactionFee; //difference between the buy value minus transaction fee of $10
+
+            int perShareSellValue = marketPrice - purchasePrice; //price for a single share
+            int totalSellValue = perShareSellValue * currentShares; //sell share valuation
+            int numberOfSharesToSell = totalSellValue / perShareSellValue; //amount of share sell can sell
+            int sellProfit = totalSellValue - transactionFee; //sell value of shares minus the $10 transaction fee
+
+            double totalSellCost = (marketPrice*numberOfSharesToSell)-10;//share market price time shares to be sold - $10 transaction fee
+            double perSellShareProfit = totalSellCost/numberOfSharesToSell; //profit for a single share sold
+            double sellHoldPosition = 1%perSellShareProfit; // 0= will not cover transaction fee and no profit per share
+            int profitFromSellOfShare = marketPrice-totalSellValue; //share sell profitability
+
+
+            //logic starts here!
+
+            // Buy shares
+            if (purchasePrice > marketPrice && availableFundsToBuyShares >0)
+            {
+                System.out.printf("Buy %.0f shares%n",numberOfSharesToBuy);
+                System.out.printf("Rationale: After paying the $%d transaction fee, there are enough funds remaining to buy %.0f shares. At a%npurchase price vs. market price difference of $%d per share, our %.0f shares represent a value gain of $%.0f dollars, which is %n$%.0f more than the $%d transaction fee - so we come out $%.0f ahead.",transactionFee, numberOfSharesToBuy, perShareBuyValue, numberOfSharesToBuy, totalBuyValue, aheadOfBuy, transactionFee, aheadOfBuy);
+            }
+            //Buy Hold shares
+            if (purchasePrice > marketPrice && availableFundsToBuyShares ==0)
+            {
+                System.out.printf("Hold shares%n");
+                System.out.printf("Rationale: Even though the current market price is very low (compared to the purchase price), after paying the%n$%d transaction fee, we would not have any funds left to buy shares; so we can only hold.%n", transactionFee);
+            }
+
+            //Sell shares
+            if (purchasePrice < marketPrice  && sellProfit > 1)
+            {
+            /*using concatenation as for println()
+            Rationale: With a market price vs. purchase price vs. difference of <1> $%d per share, we stand to make <2> $%d from <3>the%nsale
+            of our <4> %d shares. This is <5> $%d more than the price of the transaction fee, so we will come out <6> $%d ahead <7>%ntherefore
+            we should sell all <8> %d shares.<9> %n", perShareSellValue, totalSellValue, numberOfSharesToSell, sellProfit, sellProfit, numberOfSharesToSell);
+            Passing the variable and formatting the numbers with printf(): <1> $%d <2>$%d <3> %n <4> %d <5> $%d <6> $%d <7> %n <8> %d <9>  %n
+            at end of paragraph, use the variable associated with all <1-9> except %n which is a return (\n).
+            List all variable in list of use: perShareSellValue, totalSellValue, numberOfSharesToSell, sellProfit, sellProfit, numberOfSharesToSell
+            */
+
+                System.out.printf("Sell %d shares%n", numberOfSharesToSell);
+                System.out.printf("Rationale: With a market price vs. purchase price vs. difference of $%d per share, we stand to make $%d from the%nsale of our %d shares. This is $%d more than the price of the transaction fee, so we will come out $%d ahead %ntherefore we should sell all %d shares.%n", perShareSellValue, totalSellValue, numberOfSharesToSell, sellProfit, sellProfit, numberOfSharesToSell);
+            }
+            //sell when purchasePrice is less than marketPrice and making a profit ==1
+            if (purchasePrice < marketPrice && sellProfit ==1)
+            {
+                System.out.printf("Sell %d shares%n", numberOfSharesToSell);
+                System.out.printf("Rationale: Our %d share is worth $%d more than we paid for it at the current market price. The $%d dollars%nobtained by selling that share now will still leave us with a profit of $%d after paying the $%d transaction fee.%nProfit is profit, so we should sell.", numberOfSharesToSell, perShareSellValue, totalSellValue, sellProfit, transactionFee);
+            }
+            //Sell Hold
+        /*logic sellHoldPosition == 0, this individual is not making a profit when comparing a single share.
+          sellHoldPositions: 0 = hold and 1 = cover sell and makes a profit.*/
+            if (purchasePrice < marketPrice  && sellProfit == 0 && sellHoldPosition ==0)
+            {
+                System.out.printf("Hold shares%n");
+                System.out.printf("Rationale: Selling our %d share for $%d will leave us with just $%d after we pay the $%d transaction fee. That is the%nsame as what we paid for it, and we won't make any profit - so we should hold.", numberOfSharesToSell, marketPrice, profitFromSellOfShare, transactionFee);
+            }
+            //End
+        }
+    }
