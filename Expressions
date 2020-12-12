@@ -1,0 +1,140 @@
+
+
+import java.util.Scanner;
+
+public class Assignment02 {
+
+    public static void main(String[] args) {
+
+
+
+        Scanner myObj = new Scanner(System.in);
+
+        //Start input
+
+        System.out.print("Length of road project (miles):  ");
+        double roadLength = myObj.nextDouble();
+
+        System.out.print("Number of lanes               :  ");
+        int numberOfLanes = myObj.nextInt();
+
+        System.out.print("Depth of asphalt (inches)     :  ");
+        int depthOfAsphalt = myObj.nextInt();
+
+        System.out.print("Days to complete project      :  ");
+        int daysCompleteProject = myObj.nextInt();
+
+        System.out.print(" "); //blank space
+        //End Input
+
+        //Formulas and Variables
+        final int milesToFeet = 5280;     //one mile equals to 5280 feet
+        final int laneWith = 12;          //all lanes are 12 feet wide
+        final int cubicFootAsphalt = 150; //one cubic foot asphalt is equals to 150lbs
+        double poundPerInchLayer = 12.5;  //150 pound per cubic feet /12 = 12.5
+        int asphaltTruckload = 10000;     //each truckload is 10000 lbs
+        int asphaltTruckloadTon = 5;      //each truckload is 5 tons
+        int asphaltCostPerTon = 200;      //asphalt cost per ton $200
+        int conduitPipeLength = 24;       //each pipe measures 24 feet
+        int conduitPipeCost = 500;        //cost per pipe
+        int stopLightCost = 25000;        //Stoplights cost $25,000 per light
+        int workday = 8;                  //daily working hours
+        int hourlyWorkRate = 25;          //workers earn $25 per hour
+
+        //Formulas
+        double totalConstructionMile = ((milesToFeet * roadLength) * (numberOfLanes * laneWith));
+        double truckload = (((totalConstructionMile * poundPerInchLayer) * depthOfAsphalt) / asphaltTruckload);
+        int IntTruckload = (int) Math.ceil(truckload); //1.Truckloads of Asphalt
+        double costOfAsphalt = (IntTruckload * asphaltTruckloadTon) * asphaltCostPerTon;
+        double crewMembers = 50 * (roadLength * numberOfLanes) / daysCompleteProject;
+        int IntCrewMembers = (int) Math.ceil(crewMembers); //convert double to integer
+        double dailyWorkRate = workday * hourlyWorkRate;  //daily wages 8 hours*$25 per/hour $200 working day wages
+        double costOfLabor = daysCompleteProject * (IntCrewMembers * dailyWorkRate);
+        double conduitPipeforProject = ((roadLength * milesToFeet) / conduitPipeLength);
+        int IntConduitPipeforProject = (int) Math.ceil(conduitPipeforProject);
+        double costOfConduitPipes = (conduitPipeCost * ((roadLength * milesToFeet) / conduitPipeLength));
+
+
+        //Start miles to intersections
+        int IntroadLength = (int) roadLength; //convert double to int using typecasting
+        int nInter = 0;
+
+        switch (IntroadLength)
+        {
+            case 1:
+                nInter = 1;
+                break;
+            case 2:
+                nInter = 2;
+                break;
+            case 3:
+                nInter = 3;
+                break;
+            default:
+        }
+        //End miles to intersections
+
+
+        //Start switch - intersection stoplights
+        int nStoplights = 0;
+
+        switch (numberOfLanes) {
+            case 1:
+                nStoplights = 3;
+                break;
+            case 2:
+                nStoplights = 4;
+                break;
+            case 3:
+                nStoplights = 5;
+                break;
+            default:
+        }
+        //End switch - intersection stoplights
+
+
+        //Start output
+
+        //Label: Amount of materials needed
+        System.out.println(" "); //blank space
+        System.out.println("=== Amount of materials needed ==="); //header
+
+        //Truckloads of Asphalt
+        System.out.println("Truckloads of Asphalt :" + IntTruckload);
+
+        //Stoplights
+        int totalLights = (+nInter*+nStoplights);
+        System.out.println("Stoplights            :" + totalLights);
+
+        //Conduit Pipes
+        System.out.println("Conduit Pipes         :" + IntConduitPipeforProject);
+
+        //Crew members
+        System.out.println("Crew Members          :" + +IntCrewMembers);
+
+        //label: Cost of Materials
+        System.out.println("=== Cost of Materials ============"); //header
+
+        //Cost of Asphalt
+        System.out.printf("Cost of Asphalt       :$%.2f%n", +costOfAsphalt);
+
+        //Cost of Stoplights
+        double totalCostOfLights = (+stopLightCost*(+nInter*+nStoplights));
+        System.out.printf("Cost of Stoplights    :$%.2f%n", +totalCostOfLights);
+
+        //Cost of Conduit Pipes
+        System.out.printf("Cost of Conduit Pipes :$%.2f%n", +costOfConduitPipes);
+
+        //Cost of Labor
+        System.out.printf("Cost of Labor         :$%.2f%n", +costOfLabor);
+
+        //Label: Total cost of project
+        double totalCost = (+costOfAsphalt + totalCostOfLights + costOfConduitPipes + costOfLabor );
+        System.out.println("=== Total Cost of Project ========"); //header
+
+        //Total Cost
+        System.out.printf("Total Cost            :$%.2f%n", +totalCost);
+
+        //End output
+    }
+}
