@@ -1,0 +1,45 @@
+public class Player {
+
+    private String name;
+    private double attackStat, blockStat;
+
+
+    public Player (String name, double attackStat, double blockStat) {      //Creates new player
+
+        this.name = name;
+        this.attackStat = attackStat;
+        this.blockStat = blockStat;
+
+    }
+
+    public String getName() {       //Get player name
+
+        return this.name;
+    }
+
+    public double getAttackStat() {        //Get attack stat
+
+        return this.attackStat;
+    }
+
+    public void setAttackStat( double attackStat)  {     //Updates the attack stats
+
+        this.attackStat = attackStat;
+    }
+
+    public double getBlockStat() {      //Get block stats
+
+        return this.blockStat;
+    }
+
+    public void setBlockStat (double blockStat) {  //Update block stats
+
+        this.blockStat = attackStat;
+    }
+
+    public void printPlayerInfo() {        //Prints the players info - stats & blocks
+
+
+        System.out.printf("%s (attack = %.2f, block = %.2f)\n", this.name, this.attackStat, this.blockStat);
+    }
+}
