@@ -1,0 +1,54 @@
+
+
+import java.util.Scanner;
+
+public class Assignment1 {
+
+    public static void main(String[] args) {
+
+        // This code describes the number of pizza slices each adult and child will .
+
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Welcome, Let's have fun at our party!");
+        System.out.println(" "); // line space between title and questions
+        System.out.print("How many pizza's were purchased? : ");
+        int pizzapie = in.nextInt();
+        System.out.print("How many slices of pizza are in each pie? : ");
+        int slices = in.nextInt();
+        System.out.print("How many adults are present? : ");
+        int adults = in.nextInt();
+        System.out.print("How many children are present? : ");
+        int children = in.nextInt();
+        System.out.println(" ");
+        System.out.println("Fantastc! Let's figure out who eats what now.");
+        System.out.println(" ");
+
+        in.close(); //Close scanner
+
+        // Variable
+        final int slicesPerAdult = 2;  //fix amount of slices per adult
+
+        // Formulas
+        int totalNumberSlices = pizzapie * slices;  //Calculate total amount slices.
+        int totalNumberSlicesAdults = adults * slicesPerAdult;  //Calculate total amount of slices for all aduls.
+        int slicesAvailableChildren = totalNumberSlices - totalNumberSlicesAdults; //calculate total slices available for children after adults.
+        int numberSlicesChildren = slicesAvailableChildren / children; //Slices children will get.
+        int slicesLeftOver = slicesAvailableChildren % children; //Left over slices after distribution addults and children.
+
+
+        // Output
+
+        System.out.printf("Total number of slices of pizza :   %d%n", totalNumberSlices);
+        System.out.printf("Total number of slices given to adults :   %d%n", totalNumberSlicesAdults);
+        System.out.printf("Total number of slices available for children :   %d%n", slicesAvailableChildren);
+        System.out.printf("Number of slices each child will get :   %d%n", numberSlicesChildren);
+        System.out.printf("Number of slices left over :   %d%n", slicesLeftOver);
+
+    }
+
+}
+
+
+
+
