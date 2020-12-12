@@ -1,0 +1,60 @@
+
+
+import java.util.Scanner;
+
+   public class lab2 {
+
+
+       public static void main(String[] args) {
+
+           Scanner scan = new Scanner(System.in);       //local scanner
+
+           // Variables
+           String firstName = "";
+           String lastName = "";
+           int nameLength = 0;
+
+           // Input
+
+           System.out.print("Please enter your first name: ");
+           firstName = scan.nextLine();
+           System.out.print("Please enter your last name: ");
+           lastName = scan.nextLine();
+
+           String fullName = firstName + " " + lastName;        //Concatenating 2 strings
+
+
+           System.out.print("Full name (in capitals): ");
+           System.out.println(fullName.toUpperCase());          //Upper Case Output
+
+
+           System.out.print("Length of full name: ");
+           System.out.println(fullName.length());               //Length of full name
+
+           // Define two String variables, title1 and title2 & initialize
+
+
+           String str1 = new String("cse110");
+           String str2 = "cse110";
+
+           // Compare the two string and print which one of the two ways works.
+
+           if ( str1 == str2 ) {
+
+
+               System.out.println("String comparison using " == " sign works"); //Print "String comparison using "==" sign works"
+
+           } else {
+
+               System.out.println("String comparison using " == " sign does NOT work"); //Print "String comparison using "==" sign does not work
+           }
+
+           if (str2.equals(str1) )            //Print "String comparison using "equals" method does NOT work"
+
+
+           {
+               System.out.println("String comparison using equals method works");  //Print "String comparison using "equals" method works"
+
+           } else { System.out.println("String comparison using equals method does NOT work"); }}}
+
+           //End
