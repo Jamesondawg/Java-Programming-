@@ -1,0 +1,188 @@
+
+
+
+import java.util.Arrays;
+
+public class Assignment06 {
+    public static void main(String[]    args)
+    {
+        //Arrays
+        int[] myArray  = {1, 22, 333, 400, 5005, 9}; //problems: 1,2,3,4,6,7,8
+        int[] myArray1 = {333, 22, 1, 400, 5005, 9}; //problems: 5
+        int[] myArray2 = {1, 22, 333, 400, 9};       //problems: 9
+        int[] myArray3 = {22, 5005, 400, 333, 1, 9}; //problems: 10
+
+        //1
+        printArray(", ");
+        printArray(" - ");
+        //2
+        getFirst(myArray);
+        //3
+        System.out.println(getLast(myArray));
+        //4
+        getAllButFirst(myArray);
+        //5
+        System.out.println(getIndexOfMin(myArray1));
+        //6
+        System.out.println(getIndexOfMax(myArray));
+        //7
+        swapByIndex(myArray, 1,4);
+        //8
+        removeAtIndex(myArray, 3);
+        //9
+        insertAtIndex(myArray2, 2, 777);
+        //10
+        System.out.println(isSorted(myArray3));
+    }
+
+    //Methods 1 - 10
+    //1
+    public static int printArray(String myArray)
+    {
+        int[] values = {1, 22, 333, 400, 5005, 9};
+
+        System.out.println(" ");
+
+        for (int i = 0; i < values.length; i++)
+        {
+            if (i > 0)
+            {
+                System.out.print(myArray);
+            }
+
+            System.out.print(values[i]);
+
+        }
+        return 0;
+    }
+
+    //2
+    public static void getFirst(int[] myArray)
+    {
+        System.out.println();
+        System.out.println(myArray[0]);
+    }
+
+    //3
+    private static int getLast(int[] myArray)
+    {
+        return myArray[myArray.length-1];
+    }
+
+    //4
+    private static void getAllButFirst(int[] myArray)
+    {
+        int[] copy = new int[myArray.length - 1];
+
+        for (int i = 0, j = 0; i < myArray.length; i++)
+        {
+            if (i != 0) //this is the first element in the array
+
+                copy[j++] = myArray[i];
+        }
+        System.out.println(Arrays.toString(copy));
+        // return;
+    }
+
+    //5
+    public static int getIndexOfMin(int[] myArray1)
+    {
+        int min = myArray1[0];
+        int index = 0;
+
+        for (int i = 0; i < myArray1.length; i++)
+        {
+            if (min > myArray1[i])
+            {
+                min = myArray1[i];
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    //6
+    public static int getIndexOfMax(int[] myArray)
+    {
+        int max = myArray[0];
+        int index = 0;
+
+        for (int i = 0; i < myArray.length; i++)
+        {
+            if (max < myArray[i])
+            {
+                max = myArray[i];
+                index = i;
+            }
+        }
+        return index;
+    }
+
+    //7
+    public static int swapByIndex(int[] myArray, int x, int y)
+    {
+        int temp = myArray[x];
+        myArray[x] = myArray[y];
+        myArray[y] = temp;
+
+        //print after swap
+        System.out.println(Arrays.toString(myArray));
+
+        return temp;
+    }
+
+    //8
+    public static int [] removeAtIndex(int[] myArray, int index)
+    {
+        // New array for copying elements from old array.
+        // Decrementing the old array length by 1 and assigning it to the new array.
+        int[] newArr = new int[myArray.length - 1];
+
+
+        // Copying the elements to the new array except the index from the original array.
+        for(int j=0, k=0; j<myArray.length; j++)
+        {
+            if(j == index)
+                continue;
+
+            newArr[k++] = myArray[j];
+        }
+
+        return myArray;
+
+    }
+
+    //9
+    private static int[] insertAtIndex(int[] myArray2, int index, int key)
+    {
+        System.out.println();
+        int[] result = new int[myArray2.length + 1];
+
+        for (int i = 0; i < index; i++)
+        {
+            result[i] = myArray2[i];
+        }
+
+        result[index] = key;
+
+        for (int i = index + 1; i <= myArray2.length; i++)
+        {
+            result[i] = myArray2[i - 1];
+        }
+        System.out.println(Arrays.toString(result));
+        return null;
+    }
+
+    //10
+    public static boolean isSorted(int[] myArray3)
+    {
+        for (int i = 0; i < myArray3.length - 1; i++)
+        {
+            if (myArray3[i] > myArray3[i + 1])
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
